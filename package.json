@@ -1,0 +1,27 @@
+{
+  "name": "genetic-server",
+  "version": "0.0.0",
+  "description": "AI genetic server learning",
+  "main": "index.js",
+  "bin": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:gre/server-learning.git"
+  },
+  "author": "Gaëtan Renaudeau",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gre/server-learning/issues"
+  },
+  "homepage": "https://github.com/gre/server-learning",
+  "dependencies": {
+    "body-parser": "^1.6.5",
+    "commander": "^2.3.0",
+    "express": "^4.8.4",
+    "lodash": "^2.4.1",
+    "q": "^1.0.1"
+  }
+}

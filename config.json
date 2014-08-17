@@ -1,0 +1,10 @@
+{
+  "id": "example",
+  "server": 8020,
+  "initialData": {
+    "foo": 0.1,
+    "bar": 0.1
+  },
+  "mutationRates": [ 0.4 ],
+  "generationDuration": 4
+}
