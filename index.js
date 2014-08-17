@@ -96,7 +96,7 @@ function getCurrent () {
 //// SERVER ////
 
 var app = express();
-app.use(require("body-parser").json());
+app.use(require("body-parser").urlencoded({ extended: false }));
 
 app.get("/", function (req, res) {
   res.send("See README for usage.");
@@ -125,10 +125,8 @@ app.get("/current", function (req, res) {
 });
 
 app.post("/learn", function (req, res) {
-  console.log(req.body);
   Q.fcall(function () {
-    if (typeof req.body.score !== "number") throw new Error('format: { "score": <number> }');
-    return req.body.score;
+    return parseFloat(req.body.score, 10);
   })
   .then(learn)
   .then(function (data) {
