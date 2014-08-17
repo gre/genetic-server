@@ -82,7 +82,7 @@ function learn (score) {
         data.stable = data.current;
         data.score = score;
       }
-      data.current = mutate(data.current);
+      data.current = mutate(data.stable);
     }
     logData(data);
     return storeData(data);
