@@ -26,7 +26,6 @@ if (!("generationDuration" in config)) throw new Error("config: need generationD
 
 var dataFile = ".data-"+config.id+".json";
 
-
 console.log("Config:", config);
 
 //// Data ////
@@ -66,8 +65,8 @@ function storeData (data) {
      .thenResolve(data);
 }
 
-function logData (data) {
-  console.log("Data: " + JSON.stringify(data));
+function logData (data, msg) {
+  console.log((msg||"data")+": " + JSON.stringify(data));
 }
 
 //// AI ////
@@ -76,15 +75,15 @@ function learn (score) {
   _data = _data.then(function (data) {
     data = _.clone(data);
     data.generation ++;
-    console.log("Learn score="+score+" generation="+data.generation);
     if (data.generation % config.generationDuration === 0) {
-      if (score > data.score) {
+      var learned = score > data.score;
+      if (learned) {
         data.stable = data.current;
         data.score = score;
       }
       data.current = mutate(data.stable);
+      logData(data, learned ? "Learned & Mutate" : "Ignored & Mutate");
     }
-    logData(data);
     return storeData(data);
   });
   return _data;
@@ -100,8 +99,10 @@ function mutate (values) {
      var value = values[key];
      var mutation = rate * 2 * (Math.random()-0.5);
      var newValue = value + value * mutation;
+     /*
      if (mutation)
-       console.log("Mutation for "+key+" with mutation="+mutation+" : "+value+"->"+newValue);
+       console.log("Mutation for "+key+" with mutation of "+mutation+": "+value+" -> "+newValue);
+     */
      return [ key, newValue ];
    })
    .compact()
