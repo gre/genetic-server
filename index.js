@@ -79,8 +79,8 @@ function learn (score) {
       var learned = score > data.score;
       if (learned) {
         data.stable = data.current;
-        data.score = score;
       }
+      data.score = score;
       data.current = mutate(data.stable);
       logData(data, learned ? "Learned & Mutate" : "Ignored & Mutate");
     }
